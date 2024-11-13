@@ -115,4 +115,44 @@ export class UserController{
             next(error);
         }
     }
+
+    static async getUserById(req: express.Request, res: express.Response, next: express.NextFunction){
+        try {
+            const id = req.user._id;
+            const user = await UserService.getUserById(id);
+            if(!user){
+                return res.status(404).send('User not found');
+            }
+            return res.status(200).send({user});
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async deleteUser(req: express.Request, res: express.Response, next: express.NextFunction){
+        try {
+            const id = req.params.id;
+            const user = await UserService.deleteById(id);
+            if(!user){
+                return res.status(404).send('User not found');
+            }
+            return res.status(200).send('User deleted');
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async updateUser(req: express.Request, res: express.Response, next: express.NextFunction){
+        try {
+            const id = req.params.id;
+            const payload = req.body;
+            const user = await UserService.updateUser(payload, id);
+            if(!user){
+                return res.status(404).send('User not found');
+            }
+            return res.status(200).send('User updated');
+        } catch (error) {
+            next(error);
+        }
+    }
 }

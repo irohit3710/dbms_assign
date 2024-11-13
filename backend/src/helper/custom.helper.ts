@@ -20,7 +20,7 @@ export const hashPassword = async (password: any) => {
 export const generateJwtToken = (id:any)=>{
   try {
     const payload = {
-      userId: id,
+      _id: id,
     }
 
     const token = jwt.sign(payload, CONFIG.jwt.secret,{

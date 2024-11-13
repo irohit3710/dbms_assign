@@ -44,6 +44,8 @@ const Login = () => {
         await UserService.userSignIn(userData).then((res)=>{
             // if(res.status==200){
                 // }
+                console.log(res.data.token);
+                localStorage.setItem('authKey',res.data.token);
                 toast.success('Login success');
                 navigate('/');
                 console.log("Signin success");

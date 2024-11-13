@@ -21,4 +21,16 @@ export class UserService{
     static async getAllUsers(username){
         return await makeRequest(url.getAllUsers, RequestMethods.GET);
     }
+
+    static async getUserById(){
+        return await makeRequest(url.getUserById, RequestMethods.GET);
+    }
+
+    static async deleteUser(id){
+        return await makeRequest(url.deleteUser+'/'+id, RequestMethods.DELETE);
+    }
+
+    static async updateUser(payload, id){
+        return await makeRequest(url.updateUser+'/'+id, RequestMethods.PUT, payload);
+    }
 }

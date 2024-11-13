@@ -18,13 +18,12 @@ export async function makeRequest(
         url: url,
         method: method,
         headers: {
-            Authorization: sessionStorage.getItem("authKey") || "",
+            Authorization: localStorage.getItem("authKey") || "",
         },
         data: {},
     };
 
-    
-    // console.log(requestConfig)
+    console.log("requestConfig : ",requestConfig);
     if (method !== "get" && inputPayload) {
         requestConfig.data = inputPayload;
     }
@@ -34,15 +33,6 @@ export async function makeRequest(
         let response = await axios.request(requestConfig);
         return response;
     } catch (error) {
-        // if (error.response.data) {
-        //     if (error.response.data.message) {
-        //         toast.error(error.response.data.message);
-        //     }
-        //     else {
-        //         toast.error(error.response.data);
-        //     }
-        // }
-        // axiosHandler(error.message);
         throw error.message;
     }
 }

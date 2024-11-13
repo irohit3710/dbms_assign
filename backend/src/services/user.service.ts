@@ -14,6 +14,20 @@ export class UserService{
     }
 
     static async getAllUsers(){
-        return await userModel.find();
+        return await userModel.find({},'-password');
+    }
+
+    static async getUserById(id:any){
+        return await userModel.findById(id,'-password');
+    }
+
+    static async deleteById(id:any){
+        return await userModel.findByIdAndDelete(id);
+    }
+
+    static async updateUser(payload:any, id:any){
+        return await userModel.findByIdAndUpdate(id,{
+            $set: payload,
+        },{new: true});
     }
 }
